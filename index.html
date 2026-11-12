@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
     <title>Carrousel</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
 </head>
 <body>
     <header>
         <h1>Explorez notre galerie d'inspiration</h1>
-        <button class ="toolbar">
-            Afficher/cacher
-        </button>
     </header>
 
-    <main>
+     <button class ="toolbar">
+            Afficher/Cacher
+        </button>
 
+
+    <main>
         <div class="toolbar">
-           <button id="slider-previous">Précédent</button>
-           <button id="slider-toggle">Pause/lecture</button>
-           <button id="slider-next">Suivant</button>
-           <button id="slider-random">Random</button>
+           <button id="slider-previous"><i class="fa-solid fa-backward"></i></button>
+           <button id="slider-toggle"><i class="fa-solid fa-play"></i></button>
+           <button id="slider-next"><i class="fa-solid fa-forward"></i></button>
+           <button id="slider-random"><i class="fa-solid fa-random"></i></button>
         </div>
 
         <figure class="slider">
