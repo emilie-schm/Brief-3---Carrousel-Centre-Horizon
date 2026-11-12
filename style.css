@@ -1,14 +1,46 @@
 header{
-    background-color: #80bce4;
-    h1{
-        text-align: center;
-    }
+    background-color: #57a75d;
+    padding: 20px;
+
 }
 
-img {
-    max-width: 50%;
+h1{
+    text-align: center;
+}
+
+.toolbar-hide{
+    margin-top: 10px;
+}
+
+.toolbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.slider {
+    height: auto;
+    text-align: center;
+    width: 40%;
+    margin: 30px  auto;
+}
+
+img{
+    max-width: 100%;
+    border-radius: 60px;
+    transform: rotate(-5deg);
+    margin-bottom: 30px;
 }
 
 body{
     font-family: Open Sans, sans-serif;
+    margin: 0;
 }
