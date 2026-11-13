@@ -10,7 +10,7 @@ Projet réalisé dans le cadre de la refonte de la page d'accueil du **Centre Ho
 - **Barre d'outils escamotable (R2)** : Bouton/lien d'affichage et de masquage (`#toolbar-toggle`) permettant de déployer ou replier les commandes sans recharger ni faire remonter la page.
 - **Navigation en boucle (R3 & R4)** : Boutons *Précédent* et *Suivant* permettant un défilement continu (retour à la première image après la dernière, et inversement).
 - **Mode aléatoire intelligent (R5)** : Affichage d'une photo au hasard tout en garantissant de ne jamais afficher deux fois la même photo consécutivement.
-- **Lecture automatique & Pause (R6 & R8)** : Défilement automatique toutes les 3 secondes avec changement d'icône (Play / Pause), réinitialisation du minuteur à chaque action utilisateur et déclenchement automatique après une période d'inactivité.
+- **Lecture automatique & Pause (R6 & R8)** : Défilement automatique toutes les 3 secondes avec changement d'icône (Play / Pause) et réinitialisation du minuteur à chaque action utilisateur.
 - **Raccourcis clavier (R7)** : Navigation possible à l'aide des flèches gauche (`ArrowLeft`) et droite (`ArrowRight`) du clavier.
 
 ---
@@ -45,3 +45,4 @@ centre-horizon-carrousel/
 ├── style.css             # Mise en forme, animations et media queries
 ├── script.js             # Logique interactive et gestion des événements
 └── README.md             # Documentation du projet
+```

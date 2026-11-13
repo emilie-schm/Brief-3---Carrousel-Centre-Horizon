@@ -10,12 +10,13 @@ h1 {
 }
 
 body {
-    font-family: 'Open Sans', sans-serif, Arial, sans-serif;
+    font-family: 'Open Sans', Arial, sans-serif;
     margin: 0;
 }
 
 /* Conteneur pour aligner le bouton Afficher/Cacher à gauche */
 .toolbar-container {
+    box-sizing: border-box; /* le padding reste dans les 100 % : pas de scroll horizontal sur mobile */
     width: 100%;
     max-width: 800px;
     margin: 15px auto;

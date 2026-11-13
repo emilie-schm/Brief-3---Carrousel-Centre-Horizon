@@ -3,39 +3,38 @@
 const photos = [
     {
         src: "images/loup1.jpg",
-        titre: "titre de l'image 1",
-        alt: "Paysage verdoyant avec un pont en bois au-dessus d'un cours d'eau."
+        titre: "Loup blanc au repos",
+        alt: "Loup blanc couché dans une forêt, à moitié caché derrière des branches de sapin"
     },
     {
         src: "images/loup2.jpg",
-        titre: "titre de l'image 2",
-        alt: "Vue panoramique d'une forêt dense sous un ciel bleu."
+        titre: "Loup gris sur la colline",
+        alt: "Loup gris debout de profil sur une colline, sous un ciel bleu"
     },
     {
         src: "images/loup3.png",
-        titre: "titre de l'image 3",
-        alt: "Gros plan sur une cascade naturelle au cœur de roches moussues."
+        titre: "Loup en chasse",
+        alt: "Loup gris et fauve avançant tête basse sur un sol de terre sombre, au bord d'une forêt"
     },
     {
         src: "images/loup4.jpg",
-        titre: "titre de l'image 4",
-        alt: "Chemin sinueux traversant une vallée montagneuse."
+        titre: "La meute qui hurle",
+        alt: "Meute de cinq loups blancs hurlant sur une butte enneigée, devant une forêt de bouleaux"
     },
     {
         src: "images/loup5.jpg",
-        titre: "titre de l'image 5",
-        alt: "Reflet d'un coucher de soleil flamboyant sur un lac calme."
+        titre: "Regard dans les feuillages",
+        alt: "Loup gris regardant l'objectif au milieu des feuillages verts d'une forêt"
     },
     {
         src: "images/loup6.jpg",
-        titre: "titre de l'image 6",
-        alt: "Vue d'une chaîne de montagnes enneigées sous un ciel dégagé."
+        titre: "Loup dans la neige",
+        alt: "Loup roux marchant dans une forêt enneigée, le museau couvert de neige"
     }
 ];
 
 let currentIndex = 0;
 let timer = null;
-let inactivityTimer = null;
 let isPlaying = false;
 
 // Sélection des éléments DOM
@@ -78,20 +77,12 @@ function updatePlayState(playing) {
     }
 }
 
-// Relance du délai de lecture auto et gestion de l'inactivité (si inactif 5s, lance le diaporama)
+// Relance le délai de 3 s si la lecture auto est active
 function resetTimer() {
     if (isPlaying) {
         clearInterval(timer);
         timer = setInterval(nextPhoto, 3000);
     }
-
-    // Gestion de l'inactivité utilisateur (ex: 5 secondes sans action lance la lecture auto)
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => {
-        if (!isPlaying) {
-            updatePlayState(true);
-        }
-    }, 5000);
 }
 
 // Suivante
@@ -163,6 +154,6 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-// Lancement au démarrage et initialisation du timer d'inactivité
+// Affichage de la première photo au démarrage
 displayPhoto(currentIndex);
 resetTimer();
