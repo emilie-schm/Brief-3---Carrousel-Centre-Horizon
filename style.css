@@ -14,18 +14,18 @@ body {
     margin: 0;
 }
 
-main {
+/* Conteneur pour aligner le bouton Afficher/Cacher à gauche */
+.toolbar-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 15px auto;
+    padding: 0 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
+    justify-content: flex-start;
 }
 
 /* Bouton Afficher/Cacher */
-body > button.toolbar {
-    display: block;
-    margin: 15px auto;
+#toolbar-toggle {
     padding: 8px 16px;
     background-color: #fff;
     border: 1px solid #57a75d;
@@ -36,11 +36,19 @@ body > button.toolbar {
     transition: background-color 0.2s, color 0.2s;
 }
 
-body > button.toolbar:hover, 
-body > button.toolbar:focus {
+#toolbar-toggle:hover, 
+#toolbar-toggle:focus {
     background-color: #57a75d;
     color: white;
     outline: 2px solid #333;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
 }
 
 /* Barre d'outils des boutons */

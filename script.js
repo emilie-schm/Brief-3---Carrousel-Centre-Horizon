@@ -35,9 +35,10 @@ const photos = [
 
 let currentIndex = 0;
 let timer = null;
+let inactivityTimer = null;
 let isPlaying = false;
 
-// Sélection sécurisée via les ID
+// Sélection des éléments DOM
 const imgElement = document.getElementById("slider-image");
 const captionElement = document.getElementById("slider-caption");
 const counterElement = document.getElementById("slider-counter");
@@ -59,19 +60,48 @@ function displayPhoto(index) {
     counterElement.textContent = `${index + 1} / ${photos.length}`;
 }
 
-// Relance du timer à chaque action utilisateur
+// Mise à jour de l'icône et de l'état du bouton play/pause
+function updatePlayState(playing) {
+    isPlaying = playing;
+    const icon = btnToggle.querySelector("i");
+    if (isPlaying) {
+        btnToggle.setAttribute("aria-label", "Pause");
+        icon.className = "fa-solid fa-pause";
+        if (!timer) {
+            timer = setInterval(nextPhoto, 3000);
+        }
+    } else {
+        btnToggle.setAttribute("aria-label", "Lecture");
+        icon.className = "fa-solid fa-play";
+        clearInterval(timer);
+        timer = null;
+    }
+}
+
+// Relance du délai de lecture auto et gestion de l'inactivité (si inactif 5s, lance le diaporama)
 function resetTimer() {
     if (isPlaying) {
         clearInterval(timer);
         timer = setInterval(nextPhoto, 3000);
     }
+
+    // Gestion de l'inactivité utilisateur (ex: 5 secondes sans action lance la lecture auto)
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        if (!isPlaying) {
+            updatePlayState(true);
+        }
+    }, 5000);
 }
 
 // Suivante
 function nextPhoto() {
     currentIndex = (currentIndex + 1) % photos.length;
     displayPhoto(currentIndex);
-    resetTimer();
+    if (isPlaying) {
+        clearInterval(timer);
+        timer = setInterval(nextPhoto, 3000);
+    }
 }
 
 // Précédente
@@ -93,24 +123,10 @@ function randomPhoto() {
     resetTimer();
 }
 
-// Lecture / Pause
+// Lecture / Pause (clic sur le bouton)
 function togglePlay() {
-    const icon = btnToggle.querySelector("i");
-    if (isPlaying) {
-        clearInterval(timer);
-        timer = null;
-    } else {
-        timer = setInterval(nextPhoto, 3000);
-    }
-    isPlaying = !isPlaying;
-    
-    if (isPlaying) {
-        btnToggle.setAttribute("aria-label", "Pause");
-        icon.className = "fa-solid fa-pause";
-    } else {
-        btnToggle.setAttribute("aria-label", "Lecture");
-        icon.className = "fa-solid fa-play";
-    }
+    updatePlayState(!isPlaying);
+    resetTimer();
 }
 
 // Afficher / Masquer la barre d'outils
@@ -118,22 +134,35 @@ toolbarToggle.addEventListener("click", () => {
     toolbarButtons.classList.toggle("hidden");
     const isExpanded = toolbarButtons.classList.contains("hidden") ? "false" : "true";
     toolbarToggle.setAttribute("aria-expanded", isExpanded);
+    resetTimer();
 });
 
 // Écouteurs d'événements
-btnNext.addEventListener("click", () => nextPhoto());
-btnPrevious.addEventListener("click", () => prevPhoto());
-btnRandom.addEventListener("click", () => randomPhoto());
+btnNext.addEventListener("click", () => {
+    nextPhoto();
+    resetTimer();
+});
+btnPrevious.addEventListener("click", () => {
+    prevPhoto();
+    resetTimer();
+});
+btnRandom.addEventListener("click", () => {
+    randomPhoto();
+    resetTimer();
+});
 btnToggle.addEventListener("click", () => togglePlay());
 
 // Navigation clavier
 document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
         nextPhoto();
+        resetTimer();
     } else if (e.key === "ArrowLeft") {
         prevPhoto();
+        resetTimer();
     }
 });
 
-// Lancement au démarrage
+// Lancement au démarrage et initialisation du timer d'inactivité
 displayPhoto(currentIndex);
+resetTimer();
