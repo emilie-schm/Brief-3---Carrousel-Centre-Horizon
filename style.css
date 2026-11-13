@@ -1,46 +1,109 @@
-header{
+header {
     background-color: #57a75d;
     padding: 20px;
-
+    color: white;
 }
 
-h1{
+h1 {
     text-align: center;
+    font-size: 1.8rem;
 }
 
-.toolbar-hide{
-    margin-top: 10px;
+body {
+    font-family: 'Open Sans', sans-serif, Arial, sans-serif;
+    margin: 0;
 }
 
-.toolbar{
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Bouton Afficher/Cacher */
+body > button.toolbar {
+    display: block;
+    margin: 15px auto;
+    padding: 8px 16px;
+    background-color: #fff;
+    border: 1px solid #57a75d;
+    color: #57a75d;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+body > button.toolbar:hover, 
+body > button.toolbar:focus {
+    background-color: #57a75d;
+    color: white;
+    outline: 2px solid #333;
+}
+
+/* Barre d'outils des boutons */
+.toolbar {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
 
-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+.toolbar.hidden {
+    display: none;
+}
+
+.toolbar button {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.toolbar button:hover,
+.toolbar button:focus {
+    background-color: #e2e6ea;
+    outline: 2px solid #57a75d;
 }
 
 .slider {
     height: auto;
     text-align: center;
-    width: 40%;
-    margin: 30px  auto;
+    width: 100%;
+    max-width: 450px;
+    margin: 20px auto;
 }
 
-img{
+img {
     max-width: 100%;
-    border-radius: 60px;
-    transform: rotate(-5deg);
-    margin-bottom: 30px;
+    height: auto;
+    border-radius: 40px;
+    transform: rotate(-3deg);
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-body{
-    font-family: Open Sans, sans-serif;
-    margin: 0;
+#slider-caption {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+#slider-counter {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+@media (max-width: 375px) {
+    h1 {
+        font-size: 1.3rem;
+    }
+    img {
+        transform: rotate(0deg);
+        border-radius: 20px;
+    }
 }

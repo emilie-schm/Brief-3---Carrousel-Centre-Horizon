@@ -37,8 +37,8 @@ let currentIndex = 0;
 let timer = null;
 let isPlaying = false;
 
-// Sélection des éléments DOM
-const imgElement = document.querySelector(".slider img");
+// Sélection sécurisée via les ID
+const imgElement = document.getElementById("slider-image");
 const captionElement = document.getElementById("slider-caption");
 const counterElement = document.getElementById("slider-counter");
 
@@ -47,14 +47,10 @@ const btnNext = document.getElementById("slider-next");
 const btnRandom = document.getElementById("slider-random");
 const btnToggle = document.getElementById("slider-toggle");
 
-const toolbarToggle = document.querySelector("body > button.toolbar");
-const toolbarButtons = document.querySelector("main > div.toolbar");
+const toolbarToggle = document.getElementById("toolbar-toggle");
+const toolbarButtons = document.getElementById("toolbar-buttons");
 
-// Masquer la barre d'outils au chargement initial
-toolbarButtons.classList.add("hidden");
-toolbarToggle.setAttribute("aria-expanded", "false");
-
-// R1 & R9 : Affichage de la photo, du titre, du alt et du compteur
+// Affichage initial
 function displayPhoto(index) {
     const photo = photos[index];
     imgElement.setAttribute("src", photo.src);
@@ -63,7 +59,7 @@ function displayPhoto(index) {
     counterElement.textContent = `${index + 1} / ${photos.length}`;
 }
 
-// R8 : Relance du délai de lecture automatique à chaque action utilisateur
+// Relance du timer à chaque action utilisateur
 function resetTimer() {
     if (isPlaying) {
         clearInterval(timer);
@@ -71,21 +67,21 @@ function resetTimer() {
     }
 }
 
-// R3 : Photo suivante avec retour en boucle au début
+// Suivante
 function nextPhoto() {
     currentIndex = (currentIndex + 1) % photos.length;
     displayPhoto(currentIndex);
     resetTimer();
 }
 
-// R4 : Photo précédente avec retour en boucle à la fin
+// Précédente
 function prevPhoto() {
     currentIndex = (currentIndex - 1 + photos.length) % photos.length;
     displayPhoto(currentIndex);
     resetTimer();
 }
 
-// R5 : Photo aléatoire (jamais la même que l'actuelle)
+// Aléatoire (jamais la même d'affilée)
 function randomPhoto() {
     let newIndex;
     do {
@@ -97,7 +93,7 @@ function randomPhoto() {
     resetTimer();
 }
 
-// R6 : Gestion de la lecture automatique et du bouton pause/lecture
+// Lecture / Pause
 function togglePlay() {
     const icon = btnToggle.querySelector("i");
     if (isPlaying) {
@@ -117,21 +113,20 @@ function togglePlay() {
     }
 }
 
-// R2 : Afficher / Masquer la barre d'outils au clic sans remonter la page
-toolbarToggle.addEventListener("click", (e) => {
-    e.preventDefault();
+// Afficher / Masquer la barre d'outils
+toolbarToggle.addEventListener("click", () => {
     toolbarButtons.classList.toggle("hidden");
     const isExpanded = toolbarButtons.classList.contains("hidden") ? "false" : "true";
     toolbarToggle.setAttribute("aria-expanded", isExpanded);
 });
 
-// Écouteurs d'événements des boutons du carrousel
+// Écouteurs d'événements
 btnNext.addEventListener("click", () => nextPhoto());
 btnPrevious.addEventListener("click", () => prevPhoto());
 btnRandom.addEventListener("click", () => randomPhoto());
 btnToggle.addEventListener("click", () => togglePlay());
 
-// R7 : Navigation au clavier (flèches gauche et droite)
+// Navigation clavier
 document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
         nextPhoto();
@@ -140,5 +135,5 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-// Initialisation au chargement de la page
+// Lancement au démarrage
 displayPhoto(currentIndex);
